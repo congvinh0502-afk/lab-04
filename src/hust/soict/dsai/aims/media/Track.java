@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-public class Track {
+public class Track implements Playable {
 
     private String title;
     private int length;
@@ -19,11 +19,38 @@ public class Track {
     public int getLength() {
         return length;
     }
-    public static void main(String[] args) {
 
-    Track track = new Track("Shape of You", 240);
+@Override
+public void play() {
 
-    System.out.println(track.getTitle());
-    System.out.println(track.getLength());
+    if (this.length > 0) {
+
+        System.out.println("Playing track: " + this.title);
+        System.out.println("Track length: " + this.length);
+
+    } else {
+
+        System.out.println("ERROR: Track length is non-positive");
+    }
+}
+public static void main(String[] args) {
+
+    Track t1 = new Track("Song 1", 200);
+    Track t2 = new Track("Song 2", 300);
+
+    CompactDisc cd = new CompactDisc(
+            1,
+            "Best Hits",
+            "Music",
+            20f,
+            0,
+            "Director",
+            "Artist"
+    );
+
+    cd.addTrack(t1);
+    cd.addTrack(t2);
+
+    cd.play();
 }
 }
