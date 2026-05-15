@@ -1,21 +1,25 @@
 package hust.soict.dsai.aims.media;
 
-public class DigitalVideoDisc extends Media {
+public class DigitalVideoDisc extends Disc {
 
     private String director;
     private int length;
 
     private static int nbDigitalVideoDiscs = 0;
 
-    public DigitalVideoDisc(String title, String category,
-            String director, int length, float cost) {
+    public DigitalVideoDisc(String title,
+        String category,
+        String director,
+        int length,
+        float cost) {
 
-        super(++nbDigitalVideoDiscs, title, category, cost);
-
-        this.director = director;
-        this.length = length;
-    }
-
+    super(++nbDigitalVideoDiscs,
+            title,
+            category,
+            cost,
+            length,
+            director);
+}
     public DigitalVideoDisc(String title) {
         this(title, null, null, 0, 0);
     }
