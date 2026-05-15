@@ -33,10 +33,28 @@ public void play() {
         System.out.println("ERROR: Track length is non-positive");
     }
 }
+
+@Override
+public boolean equals(Object obj) {
+
+    if (this == obj) {
+        return true;
+    }
+
+    if (!(obj instanceof Track)) {
+        return false;
+    }
+
+    Track other = (Track) obj;
+
+    return this.title.equals(other.title)
+            && this.length == other.length;
+}
+
 public static void main(String[] args) {
 
-    Track t1 = new Track("Song 1", 200);
-    Track t2 = new Track("Song 2", 300);
+    Track t1 = new Track("Song", 200);
+    Track t2 = new Track("Song", 200);
 
     CompactDisc cd = new CompactDisc(
             1,
@@ -52,5 +70,6 @@ public static void main(String[] args) {
     cd.addTrack(t2);
 
     cd.play();
+    System.out.println(t1.equals(t2));
 }
 }
