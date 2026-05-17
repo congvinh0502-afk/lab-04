@@ -59,15 +59,18 @@ public class DigitalVideoDisc extends Disc implements Playable {
     @Override
 public void play() {
 
-    if (this.getLength() > 0) {
+    if (this.getLength() <= 0) {
 
-        System.out.println("Playing DVD: " + this.getTitle());
+        System.out.println(
+                "ERROR: DVD length is non-positive");
 
-        System.out.println("DVD length: " + this.getLength());
-
-    } else {
-
-        System.out.println("ERROR: DVD length is non-positive");
+        return;
     }
+
+    System.out.println(
+            "Playing DVD: " + this.getTitle());
+
+    System.out.println(
+            "DVD length: " + this.getLength());
 }
 }

@@ -23,15 +23,19 @@ public class Track implements Playable {
 @Override
 public void play() {
 
-    if (this.length > 0) {
+    if (this.getLength() <= 0) {
 
-        System.out.println("Playing track: " + this.title);
-        System.out.println("Track length: " + this.length);
+        System.out.println(
+                "ERROR: Track length is non-positive");
 
-    } else {
-
-        System.out.println("ERROR: Track length is non-positive");
+        return;
     }
+
+    System.out.println(
+            "Playing Track: " + this.getTitle());
+
+    System.out.println(
+            "Track length: " + this.getLength());
 }
 
 @Override

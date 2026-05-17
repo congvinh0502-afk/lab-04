@@ -102,5 +102,7 @@ public class Cart {
         System.out.println("Not found");
     }
 }
-
+public ArrayList<Media> getItemsOrdered() {
+    return itemsOrdered;
+}
 }

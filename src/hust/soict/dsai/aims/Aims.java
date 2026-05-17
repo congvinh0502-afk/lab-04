@@ -1,7 +1,7 @@
 package hust.soict.dsai.aims;
 
 import java.util.Scanner;
-
+import java.util.Collections;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
@@ -350,21 +350,62 @@ public class Aims {
 
                             case 1:
 
-                                System.out.print(
-                                        "Enter title to search: ");
+    System.out.println("1. Filter by id");
+    System.out.println("2. Filter by title");
 
-                                String title =
-                                        scanner.nextLine();
+    int filterChoice = scanner.nextInt();
+    scanner.nextLine();
 
-                                cart.searchByTitle(title);
+    if (filterChoice == 1) {
 
-                                break;
+        System.out.print("Enter id: ");
 
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        cart.searchById(id);
+
+    } else if (filterChoice == 2) {
+
+        System.out.print("Enter title: ");
+
+        String title = scanner.nextLine();
+
+        cart.searchByTitle(title);
+    }
+
+    break;
                             case 2:
+                            
+
+                                System.out.println("1. Sort by title");
+                                System.out.println("2. Sort by cost");
+
+                                int sortChoice = scanner.nextInt();
+                                scanner.nextLine();
+
+                                if (sortChoice == 1) {
+
+                                Collections.sort(
+                                      cart.getItemsOrdered(),
+                                      Media.COMPARE_BY_TITLE_COST
+                                 );
+
+                                 System.out.println(
+                                      "Sorted by title");
+
+                                 } else if (sortChoice == 2) {
+
+                                     Collections.sort(
+                                     cart.getItemsOrdered(),
+                                     Media.COMPARE_BY_COST_TITLE
+                                );
 
                                 System.out.println(
-                                        "Sort feature");
+                                   "Sorted by cost");
+                                }
 
+                                cart.printCart();                                       
                                 break;
 
                             case 3:
