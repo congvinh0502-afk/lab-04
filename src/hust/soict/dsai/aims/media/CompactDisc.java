@@ -85,4 +85,14 @@ public class CompactDisc extends Disc implements Playable {
         System.out.println("ERROR: CD length is non-positive");
     }
 }
+
+    @Override
+    public String toString() {
+
+    return "CD - " + getTitle()
+            + " - " + getCategory()
+            + " - " + getArtist()
+            + " - " + getLength()
+            + ": " + getCost() + " $";
+}
 }
