@@ -1,0 +1,150 @@
+LAB 04 - ANSWERS
+
+========================================
+Câu 1: Tính đa hình với phương thức toString()
+========================================
+
+Khi duyệt qua ArrayList<Media> và gọi phương thức toString(),
+Java sẽ sử dụng cơ chế dynamic binding (đa hình lúc chạy).
+
+Mặc dù kiểu của danh sách là Media, nhưng đối tượng thực tế
+có thể là Book, DigitalVideoDisc hoặc CompactDisc.
+
+Vì vậy:
+- Nếu đối tượng là Book thì Book.toString() sẽ được gọi.
+- Nếu đối tượng là DVD thì DigitalVideoDisc.toString() sẽ được gọi.
+- Nếu đối tượng là CD thì CompactDisc.toString() sẽ được gọi.
+
+Điều này thể hiện tính đa hình vì cùng một lời gọi:
+media.toString()
+
+nhưng kết quả khác nhau tùy vào kiểu đối tượng thực tế.
+
+
+========================================
+Câu 2: Comparable và Comparator
+========================================
+
+1. Lớp nào nên implements Comparable?
+
+Lớp Media nên implements Comparable<Media>
+vì tất cả các media đều cần được so sánh và sắp xếp.
+
+
+2. compareTo() nên được cài đặt như thế nào?
+
+Phương thức compareTo() chỉ nên cài đặt một quy tắc sắp xếp mặc định.
+
+Ví dụ:
+- so sánh theo title trước
+- nếu title giống nhau thì so sánh cost
+
+
+3. Có thể có hai quy tắc sắp xếp với Comparable không?
+
+Không.
+
+Comparable chỉ hỗ trợ một kiểu sắp xếp tự nhiên
+vì mỗi lớp chỉ có một phương thức compareTo().
+
+Do đó nó không phù hợp khi cần:
+- sort theo title rồi cost
+- sort theo cost rồi title
+
+
+4. Vì sao Comparator phù hợp hơn?
+
+Comparator cho phép tạo nhiều quy tắc sắp xếp khác nhau.
+
+Ví dụ:
+- MediaComparatorByTitleCost
+- MediaComparatorByCostTitle
+
+mà không cần sửa lớp Media.
+
+
+5. Nếu DVD có quy tắc sắp xếp riêng thì sao?
+
+Có thể tạo một Comparator riêng cho DVD.
+
+Ví dụ:
+- sort theo title
+- rồi length giảm dần
+- rồi cost
+
+Cách này linh hoạt và không ảnh hưởng đến các loại media khác.
+
+
+========================================
+Câu 3: Phương thức equals()
+========================================
+
+Phương thức equals() được override để:
+
+- Hai Media bằng nhau nếu có cùng title.
+- Hai Track bằng nhau nếu có cùng title và cùng length.
+
+Việc này giúp tránh thêm trùng media vào Cart
+hoặc trùng Track vào CompactDisc.
+
+
+========================================
+Câu 4: Quan hệ aggregation
+========================================
+
+Các quan hệ aggregation trong project gồm:
+
+- Cart chứa nhiều Media
+- Store chứa nhiều Media
+- CompactDisc chứa nhiều Track
+
+Các lớp tổng thể khởi tạo thành phần của mình
+bằng ArrayList trong constructor.
+
+
+========================================
+Câu 5: Cấu trúc kế thừa
+========================================
+
+Cấu trúc kế thừa của project:
+
+Media (abstract)
+    |
+    +--- Disc
+            |
+            +--- DigitalVideoDisc
+            |
+            +--- CompactDisc
+    |
+    +--- Book
+
+Playable được implements bởi:
+- DigitalVideoDisc
+- CompactDisc
+- Track
+
+
+========================================
+Câu 6: Lợi ích của inheritance
+========================================
+
+Inheritance giúp loại bỏ code trùng lặp.
+
+Các thuộc tính chung như:
+- id
+- title
+- category
+- cost
+
+được đưa vào lớp Media.
+
+DVD và CD cũng dùng chung:
+- director
+- length
+
+thông qua lớp Disc.
+
+Điều này giúp:
+- tái sử dụng code
+- dễ bảo trì
+- dễ mở rộng hệ thống
